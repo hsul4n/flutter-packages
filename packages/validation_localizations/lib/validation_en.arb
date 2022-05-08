@@ -1,0 +1,198 @@
+{
+  "accepted": "{attribute} must be accepted",
+  "@accepted": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      }
+    }
+  },
+  "blank": "{attribute} can't be blank",
+  "@blank": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      }
+    }
+  },
+  "confirmation": "{attribute} doesn't match {other}",
+  "@confirmation": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      },
+      "other": {
+        "type": "String"
+      }
+    }
+  },
+  "empty": "{attribute} can't be empty",
+  "@empty": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      }
+    }
+  },
+  "equalTo": "{attribute} must be equal to {count}",
+  "@equalTo": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      },
+      "count": {}
+    }
+  },
+  "even": "{attribute} must be even",
+  "@even": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      }
+    }
+  },
+  "exclusion": "{attribute} is reserved",
+  "@exclusion": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      }
+    }
+  },
+  "greaterThan": "{attribute} must be greater than {count}",
+  "@greaterThan": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      },
+      "count": {}
+    }
+  },
+  "greaterThanOrEqualTo": "{attribute} must be greater than or equal to {count}",
+  "@greaterThanOrEqualTo": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      },
+      "count": {}
+    }
+  },
+  "inclusion": "{attribute} is not included in the list",
+  "@inclusion": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      }
+    }
+  },
+  "invalid": "{attribute} is invalid",
+  "@invalid": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      }
+    }
+  },
+  "lessThan": "{attribute} must be less than {count}",
+  "@lessThan": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      },
+        "count": {}
+    }
+  },
+  "lessThanOrEqualTo": "{attribute} must be less than or equal to {count}",
+  "@lessThanOrEqualTo": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      },
+        "count": {}
+    }
+  },
+  "notANumber": "{attribute} is not a number",
+  "@notANumber": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      }
+    }
+  },
+  "notAnInteger": "{attribute} must be an integer",
+  "@notAnInteger": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      }
+    }
+  },
+  "odd": "{attribute} must be odd",
+  "@odd": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      }
+    }
+  },
+  "otherThan": "{count, plural,other{{attribute} must be other than {count}}",
+  "@otherThan": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      },
+      "count": {}
+    }
+  },
+  "present": "{attribute} must be blank",
+  "@present": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      }
+    }
+  },
+  "required": "{attribute} must exist",
+  "@required": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      }
+    }
+  },
+  "taken": "{attribute} has already been taken",
+  "@taken": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      }
+    }
+  },
+  "tooLong": "{count, plural,=1{{attribute} is too long (maximum is 1 character)}other{{attribute} is too long (maximum is {count} characters)}",
+  "@tooLong": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      },
+      "count": {}
+    }
+  },
+  "tooShort": "{count, plural,=1{{attribute} is too short (minimum is 1 character)}other{{attribute} is too short (minimum is {count} characters)}}",
+  "@tooShort": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      },
+      "count": {}
+    }
+  },
+  "wrongLength": "{count, plural,=1{{attribute} is the wrong length (should be 1 character)}other{{attribute} is the wrong length (should be {count} characters)}}",
+  "@wrongLength": {
+    "placeholders": {
+      "attribute": {
+        "type": "String"
+      },
+      "count": {}
+    }
+  }
+}

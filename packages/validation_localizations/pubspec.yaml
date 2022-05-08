@@ -1,0 +1,29 @@
+name: validation_localizations
+description: Validation localizations.
+version: 1.0.0
+homepage: https://github.com/hsul4n/flutter-packages/packages/validation_localizations
+
+publish_to: "none"
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  intl: ^0.17.0
+  attribute_localizations:
+    git:
+      url: git://github.com/hsul4n/flutter-localizations.git
+      path: packages/attribute_localizations
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  generate: true
