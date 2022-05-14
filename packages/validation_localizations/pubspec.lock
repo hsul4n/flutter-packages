@@ -11,11 +11,9 @@ packages:
   attribute_localizations:
     dependency: "direct main"
     description:
-      path: "packages/attribute_localizations"
-      ref: HEAD
-      resolved-ref: "125483d462d2111a22b7d1aaf662e747664b6365"
-      url: "git://github.com/hsul4n/flutter-localizations.git"
-    source: git
+      name: attribute_localizations
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.0.0"
   boolean_selector:
     dependency: transitive

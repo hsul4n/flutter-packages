@@ -1,6 +1,6 @@
 Validation localizations delivers a prepeard localizations labels for most used validations messages.
 
-**We recommend using [_Flutter Validation_](https://github.com/hsul4n/flutter-validation) for the best experience.**
+**We recommend using [_Flutter Validation_](https://pub.dev.com/packages/flutter_validation) for the best experience.**
 
 # Getting Started
 
@@ -8,9 +8,7 @@ Validation localizations delivers a prepeard localizations labels for most used 
 
 ```yaml
 dependencies:
-  validation_localization:
-    url: git://github.com/hsul4n/flutter-localizations.git
-    path: packages/validation_localization
+  validation_localization: ^1.0.0
 ```
 
 1. Add delegates in your `MaterialApp` widget:
