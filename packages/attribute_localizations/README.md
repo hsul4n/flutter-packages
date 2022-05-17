@@ -6,9 +6,7 @@ Attribute Localizations delivers a prepeard localizations labels for most used a
 
 ```yaml
 dependencies:
-  attribute_localization:
-    url: git://github.com/hsul4n/flutter-localizations.git
-    path: packages/attribute_localization
+  attribute_localization: ^1.0.0
 ```
 
 1. Add delegates in your `MaterialApp` widget:
