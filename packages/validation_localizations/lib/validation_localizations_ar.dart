@@ -36,7 +36,7 @@ class ValidationLocalizationsAr extends ValidationLocalizations {
 
   @override
   String even(String attribute) {
-    return 'يجب أن يكون عدد ${attribute} زوجياً';
+    return 'يجب أن يكون ${attribute} عدداً زوجياً';
   }
 
   @override
@@ -46,12 +46,12 @@ class ValidationLocalizationsAr extends ValidationLocalizations {
 
   @override
   String greaterThan(String attribute, Object count) {
-    return 'يجب أن يكون عدد ${attribute} أكبر من ${count}';
+    return 'يجب أن يكون ${attribute} أكبر من ${count}';
   }
 
   @override
   String greaterThanOrEqualTo(String attribute, Object count) {
-    return 'يجب أن يكون عدد ${attribute} أكبر أو يساوي ${count}';
+    return 'يجب أن يكون ${attribute} أكبر أو يساوي ${count}';
   }
 
   @override
@@ -66,12 +66,12 @@ class ValidationLocalizationsAr extends ValidationLocalizations {
 
   @override
   String lessThan(String attribute, Object count) {
-    return 'يجب أن يكون عدد ${attribute} أصغر من ${count}';
+    return 'يجب أن يكون ${attribute} أصغر من ${count}';
   }
 
   @override
   String lessThanOrEqualTo(String attribute, Object count) {
-    return 'يجب أن يكون عدد ${attribute} أصغر أو  يساوي ${count}';
+    return 'يجب أن يكون ${attribute} أصغر أو  يساوي ${count}';
   }
 
   @override
@@ -81,12 +81,12 @@ class ValidationLocalizationsAr extends ValidationLocalizations {
 
   @override
   String notAnInteger(String attribute) {
-    return 'يجب أن يكون عدد ${attribute} عدد صحيحاً';
+    return 'يجب أن يكون ${attribute} عدداً صحيحاً';
   }
 
   @override
   String odd(String attribute) {
-    return 'يجب أن يكون عدد ${attribute} عدداً فردياً';
+    return 'يجب أن يكون ${attribute} عدداً فردياً';
   }
 
   @override
