@@ -49,14 +49,14 @@ class Validator {
           .invalid(AttributeLocalizations.of(_context)!.email));
 
   TextFieldValidator get phone => ExpressionValidator(
-        (value) => value != null ? PhoneNumber.fromRaw(value).validate() : true,
+        (value) => value != null ? PhoneNumber.parse(value).isValid() : true,
         errorText: ValidationLocalizations.of(_context)!
             .invalid(AttributeLocalizations.of(_context)!.phone),
       );
 
   TextFieldValidator phoneNational(IsoCode isoCode) => ExpressionValidator(
         (value) => value != null
-            ? PhoneNumber.fromNational(isoCode, value).validate()
+            ? PhoneNumber.parse(value, callerCountry: isoCode).isValid()
             : true,
         errorText: ValidationLocalizations.of(_context)!
             .invalid(AttributeLocalizations.of(_context)!.phone),
