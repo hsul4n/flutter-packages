@@ -1,6 +1,6 @@
 name: flutter_validation
 description: Ready localized validation messages.
-version: 1.0.6
+version: 1.0.7
 homepage: https://github.com/hsul4n/flutter-packages
 
 publish_to: "none"
@@ -14,7 +14,8 @@ dependencies:
     sdk: flutter
 
   # validations
-  phone_numbers_parser: ^5.0.0
+  phone_numbers_parser:
+    git: https://github.com/hsul4n/phone_numbers_parser
   form_field_validator:
     git:
       url: https://github.com/hsul4n/form_field_validator
