@@ -56,7 +56,7 @@ class Validator {
 
   TextFieldValidator phoneNational(IsoCode isoCode) => ExpressionValidator(
         (value) => value != null
-            ? PhoneNumber.parse(value, callerCountry: isoCode).isValid()
+            ? PhoneNumber.parse(value, destinationCountry: isoCode).isValid()
             : true,
         errorText: ValidationLocalizations.of(_context)!
             .invalid(AttributeLocalizations.of(_context)!.phone),

@@ -130,7 +130,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "8629496ddc8098da6a058dbc830dc52ab14e206a"
+      resolved-ref: b15c90713dd3c49ba0bb3a2dd8a2657e598871d1
       url: "https://github.com/hsul4n/phone_numbers_parser"
     source: git
     version: "7.0.0"

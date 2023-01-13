@@ -16,6 +16,7 @@ dependencies:
   # validations
   phone_numbers_parser:
     git: https://github.com/hsul4n/phone_numbers_parser
+
   form_field_validator:
     git:
       url: https://github.com/hsul4n/form_field_validator
