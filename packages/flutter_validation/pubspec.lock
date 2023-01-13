@@ -129,7 +129,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
+      ref: dev
       resolved-ref: b15c90713dd3c49ba0bb3a2dd8a2657e598871d1
       url: "https://github.com/hsul4n/phone_numbers_parser"
     source: git
