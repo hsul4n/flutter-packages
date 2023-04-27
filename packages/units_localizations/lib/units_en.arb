@@ -1,0 +1,446 @@
+{
+  "knots": "{value,plural, =0{knots}=1{knot}other{knots}}",
+  "@knots": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "kilometersPerHours": "{kilometers} per {hours}",
+  "@kilometersPerHours": {
+    "type": "text",
+    "placeholders": {
+      "kilometers": {},
+      "hours": {}
+    }
+  },
+  "milesPerHours": "{miles} per {hours}",
+  "@milesPerHours": {
+    "type": "text",
+    "placeholders": {
+      "miles": {},
+      "hours": {}
+    }
+  },
+  "metersPerSeconds": "{meters} per {seconds}",
+  "@metersPerSeconds": {
+    "type": "text",
+    "placeholders": {
+      "meters": {},
+      "seconds": {}
+    }
+  },
+  "kilometersPerLiters": "{kilometers} per {liters}",
+  "@kilometersPerLiters": {
+    "type": "text",
+    "placeholders": {
+      "kilometers": {},
+      "liters": {}
+    }
+  },
+  "metersPerLiters": "{meters} per {liters}",
+  "@metersPerLiters": {
+    "type": "text",
+    "placeholders": {
+      "meters": {},
+      "liters": {}
+    }
+  },
+  "milesPerImperialGallons": "{miles} per imperial {gallons}",
+  "@milesPerImperialGallons": {
+    "type": "text",
+    "placeholders": {
+      "miles": {},
+      "gallons": {}
+    }
+  },
+  "milesPerUsGallons": "{miles} per US {gallons}",
+  "@milesPerUsGallons": {
+    "type": "text",
+    "placeholders": {
+      "miles": {},
+      "gallons": {}
+    }
+  },
+  "miles": "{length,plural, =0{miles}=1{mile}other{miles}}",
+  "@miles": {
+    "type": "text",
+    "placeholders": {
+      "length": {}
+    }
+  },
+  "inches": "{length,plural, =0{inches}=1{inche}other{inches}}",
+  "@inches": {
+    "type": "text",
+    "placeholders": {
+      "length": {}
+    }
+  },
+  "meters": "{length,plural, =0{meters}=1{meter}other{meters}}",
+  "@meters": {
+    "type": "text",
+    "placeholders": {
+      "length": {}
+    }
+  },
+  "kilometers": "{length,plural, =0{kilometers}=1{kilometer}other{kilometers}}",
+  "@kilometers": {
+    "type": "text",
+    "placeholders": {
+      "length": {}
+    }
+  },
+  "gramsPerMeters": "{grams} per {meters}",
+  "@gramsPerMeters": {
+    "type": "text",
+    "placeholders": {
+      "grams": {},
+      "meters": {}
+    }
+  },
+  "gramsPerMiles": "{grams} per {miles}",
+  "@gramsPerMiles": {
+    "type": "text",
+    "placeholders": {
+      "grams": {},
+      "miles": {}
+    }
+  },
+  "kilogramsPerKilometers": "{kilograms} per {kilometers}",
+  "@kilogramsPerKilometers": {
+    "type": "text",
+    "placeholders": {
+      "kilograms": {},
+      "kilometers": {}
+    }
+  },
+  "kilogramsPerMeters": "{kilograms} per {meters}",
+  "@kilogramsPerMeters": {
+    "type": "text",
+    "placeholders": {
+      "kilograms": {},
+      "meters": {}
+    }
+  },
+  "gramsPerKilometers": "{grams} per {kilometers}",
+  "@gramsPerKilometers": {
+    "type": "text",
+    "placeholders": {
+      "grams": {},
+      "kilometers": {}
+    }
+  },
+  "micrograms": "{value,plural, =0{micrograms}=1{microgram}other{micrograms}}",
+  "@micrograms": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "milligrams": "{value,plural, =0{milligrams}=1{milligram}other{milligrams}}",
+  "@milligrams": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "grams": "{value,plural, =0{grams}=1{gram}other{grams}}",
+  "@grams": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "tons": "{value,plural, =0{tons}=1{ton}other{tons}}",
+  "@tons": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "ounce": "{value,plural, =0{ounces}=1{ounce}other{ounces}}",
+  "@ounce": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "stone": "{value,plural, =0{stones}=1{stone}other{stones}}",
+  "@stone": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "pounds": "{value,plural, =0{pounds}=1{pound}other{pounds}}",
+  "@pounds": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "kilograms": "{value,plural, =0{kilograms}=1{kilogram}other{kilograms}}",
+  "@kilograms": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "pascals": "{value,plural, =0{pascal}=1{pascal}other{pascals}}",
+  "@pascals": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "bars": "{value,plural, =0{bar}=1{bar}other{bars}}",
+  "@bars": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "poundForcePerSquareInch": "{pounds} force per square {inches}",
+  "@poundForcePerSquareInch": {
+    "type": "text",
+    "placeholders": {
+      "pounds": {},
+      "inches": {}
+    }
+  },
+  "celsius": "{value,plural, =0{celsius}=1{celsius}other{celsius}}",
+  "@celsius": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "fahrenheit": "{value,plural, =0{fahrenheit}=1{fahrenheit}other{fahrenheit}}",
+  "@fahrenheit": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "kelvin": "{value,plural, =0{kelvin}=1{kelvin}other{kelvins}}",
+  "@kelvin": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "rankine": "{value,plural, =0{rankine}=1{rankine}other{rankines}}",
+  "@rankine": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "romer": "{value,plural, =0{rømer}=1{rømer}other{rømer}}",
+  "@romer": {
+    "type": "text",
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "century": "{time,plural, =0{centuries}=1{century}other{centuries}}",
+  "@century": {
+    "type": "text",
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "decade": "{time,plural, =0{decades}=1{decade}other{decades}}",
+  "@decade": {
+    "type": "text",
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "year": "{time,plural, =0{year}=1{year}other{years}}",
+  "@year": {
+    "type": "text",
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "month": "{time,plural, =0{month}=1{month}other{months}}",
+  "@month": {
+    "type": "text",
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "monthAbbreviation": "{time,plural, =0{mo}=1{mo}other{mos}}",
+  "@monthAbbreviation": {
+    "type": "text",
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "week": "{time,plural, =0{week}=1{week}other{weeks}}",
+  "@week": {
+    "type": "text",
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "day": "{time,plural, =0{days}=1{day}other{days}}",
+  "@day": {
+    "type": "text",
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "hour": "{time,plural, =0{hours}=1{hour}other{hours}}",
+  "@hour": {
+    "type": "text",
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "minute": "{time,plural, =0{minute}=1{minute}other{minutes}}",
+  "@minute": {
+    "type": "text",
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "second": "{time,plural, =0{seconds}=1{second}other{seconds}}",
+  "@second": {
+    "type": "text",
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "millisecond": "{time,plural, =0{millisecond}=1{millisecond}other{milliseconds}}",
+  "@millisecond": {
+    "type": "text",
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "microsecond": "{time,plural, =0{microsecond}=1{microsecond}other{microseconds}}",
+  "@microsecond": {
+    "type": "text",
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "imperialGallonsPerMiles": "imp {gallons} per {miles}",
+  "@imperialGallonsPerMiles": {
+    "type": "text",
+    "placeholders": {
+      "gallons": {},
+      "miles": {}
+    }
+  },
+  "usGallonsPerMiles": "US {gallons} per {miles}",
+  "@usGallonsPerMiles": {
+    "type": "text",
+    "placeholders": {
+      "gallons": {},
+      "miles": {}
+    }
+  },
+  "litersPerMeters": "{liters} per {meters}",
+  "@litersPerMeters": {
+    "type": "text",
+    "placeholders": {
+      "liters": {},
+      "meters": {}
+    }
+  },
+  "litersPerKilometers": "{liters} per {kilometers}",
+  "@litersPerKilometers": {
+    "type": "text",
+    "placeholders": {
+      "liters": {},
+      "kilometers": {}
+    }
+  },
+  "cubicFoot": "{volume,plural, =0{cubic foot}=1{cubic foot}other{cubic foot}}",
+  "@cubicFoot": {
+    "type": "text",
+    "placeholders": {
+      "volume": {}
+    }
+  },
+  "cubicInch": "{volume,plural, =0{cubic inch}=1{cubic inch}other{cubic inch}}",
+  "@cubicInch": {
+    "type": "text",
+    "placeholders": {
+      "volume": {}
+    }
+  },
+  "cubicMeter": "{volume,plural, =0{cubic meter}=1{cubic meter}other{cubic meter}}",
+  "@cubicMeter": {
+    "type": "text",
+    "placeholders": {
+      "volume": {}
+    }
+  },
+  "cup": "{volume,plural, =0{cups}=1{cup}other{cups}}",
+  "@cup": {
+    "type": "text",
+    "placeholders": {
+      "volume": {}
+    }
+  },
+  "fluidOunces": "{volume,plural, =0{fluid ounces}=1{fluid ounce}other{fluid ounces}}",
+  "@fluidOunces": {
+    "type": "text",
+    "placeholders": {
+      "volume": {}
+    }
+  },
+  "quart": "{volume,plural, =0{quarts}=1{quart}other{quarts}}",
+  "@quart": {
+    "type": "text",
+    "placeholders": {
+      "volume": {}
+    }
+  },
+  "pint": "{volume,plural, =0{pint}=1{pint}other{pints}}",
+  "@pint": {
+    "type": "text",
+    "placeholders": {
+      "volume": {}
+    }
+  },
+  "tablespoon": "{volume,plural, =0{tablespoon}=1{tablespoon}other{tablespoons}}",
+  "@tablespoon": {
+    "type": "text",
+    "placeholders": {
+      "volume": {}
+    }
+  },
+  "teaspoon": "{volume,plural, =0{teaspoon}=1{teaspoon}other{teaspoons}}",
+  "@teaspoon": {
+    "type": "text",
+    "placeholders": {
+      "volume": {}
+    }
+  },
+  "gallons": "{volume,plural, =0{gallons}=1{gallon}other{gallons}}",
+  "@gallons": {
+    "type": "text",
+    "placeholders": {
+      "volume": {}
+    }
+  },
+  "milliliters": "{volume,plural, =0{milliliters}=1{milliliter}other{milliliters}}",
+  "@milliliters": {
+    "type": "text",
+    "placeholders": {
+      "volume": {}
+    }
+  },
+  "liters": "{volume,plural, =0{liters}=1{liter}other{liters}}",
+  "@liters": {
+    "type": "text",
+    "placeholders": {
+      "volume": {}
+    }
+  }
+}
