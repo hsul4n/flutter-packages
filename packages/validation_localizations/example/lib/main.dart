@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -68,9 +68,9 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             TextFormField(
               validator: (value) {
-                if (value.length < 6)
-                  return ValidationLocalizations.of(context).tooShort(
-                    AttributeLocalizations.of(context).password,
+                if (value!.length < 6)
+                  return ValidationLocalizations.of(context)!.tooShort(
+                    AttributeLocalizations.of(context)!.password,
                     6,
                   );
 
@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _formKey.currentState.validate(),
+        onPressed: () => _formKey.currentState!.validate(),
         tooltip: 'Submit',
         child: Icon(Icons.done),
       ), // This trailing comma makes auto-formatting nicer for build methods.
