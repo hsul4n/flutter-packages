@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key key}) : super(key: key);
+  const MyHomePage({super.key});
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     key: const ValueKey('avatars'),
-                    initialValues: <String>[
+                    initialValues: <String?>[
                       _user.avatar,
                     ],
                     quality: 20,
@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     decoration: InputDecoration(
                       helperText: 'Please pick images',
                     ),
-                    validator: (a) => a.isEmpty ? 'aa' : null,
+                    validator: (a) => a!.isEmpty ? 'aa' : null,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     emptyBuilder: (context) {
                       return CircleAvatar(
@@ -209,8 +209,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _submit() {
-    if (_clipKey.currentState.validate()) {
-      _clipKey.currentState.save();
+    if (_clipKey.currentState!.validate()) {
+      _clipKey.currentState!.save();
 
       print('Done');
     }
