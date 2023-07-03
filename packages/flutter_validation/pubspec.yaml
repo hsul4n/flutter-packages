@@ -22,7 +22,7 @@ dependencies:
   form_field_validator:
     git:
       url: https://github.com/hsul4n/form_field_validator
-      ref: 1.0.3
+      ref: 1.0.4
 
   # localizations
   attribute_localizations: ^1.0.1
