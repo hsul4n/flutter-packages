@@ -141,6 +141,7 @@ class ClipGridView extends ClipField<List<XFile>> {
                         : itemBuilder(context, value[index], index),
                     onTap: () {
                       showModalBottomSheet(
+                        clipBehavior: ui.Clip.antiAliasWithSaveLayer,
                         context: field.context,
                         builder: (BuildContext context) {
                           return SafeArea(

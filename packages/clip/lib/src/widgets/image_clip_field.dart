@@ -1,13 +1,11 @@
 import 'dart:io';
-import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:clip/l10n/clip_localizations.dart';
-import 'package:clip/src/widgets/gallery_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:clip/clip.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 enum ClipOption {
@@ -78,6 +76,7 @@ class ImageClipField extends ClipField<XFile> {
                   child: builder(field.context, field.value),
                   onTap: () {
                     showModalBottomSheet(
+                      clipBehavior: ui.Clip.antiAliasWithSaveLayer,
                       context: field.context,
                       builder: (BuildContext context) {
                         return SafeArea(

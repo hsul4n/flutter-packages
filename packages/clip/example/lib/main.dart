@@ -157,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   scrollDirection: Axis.horizontal,
                   key: const ValueKey('avatars'),
                   initialValues: <String>[
-                    _user.avatar,
+                    _user.avatar!,
                   ],
                   quality: 20,
                   maxHeight: 1024,
