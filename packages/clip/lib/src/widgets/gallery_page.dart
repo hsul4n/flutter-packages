@@ -37,6 +37,10 @@ class _GalleryPageState extends State<GalleryPage> {
             ? Text(
                 '${_currentIndex + 1} ${ClipLocalizations.of(context)!.ofMany.toLowerCase()} ${widget.attachments.length}')
             : null,
+        titleTextStyle: Theme.of(context)
+            .textTheme
+            .titleLarge!
+            .copyWith(color: Colors.white),
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
