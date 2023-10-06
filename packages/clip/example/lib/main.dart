@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key key}) : super(key: key);
+  const MyHomePage({super.key});
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     decoration: InputDecoration(
                       helperText: 'Please pick images',
                     ),
-                    validator: (a) => a.isEmpty ? 'aa' : null,
+                    validator: (a) => a!.isEmpty ? 'aa' : null,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     emptyBuilder: (context) {
                       return CircleAvatar(
@@ -150,52 +150,57 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
-              // SizedBox(
-              //   child: MultiImageClipField(
-              //     key: ValueKey('avatars'),
-              //     initialValue: <String>[_user.avatar],
-              //     quality: 20,
-              //     maxHeight: 1024,
-              //     decoration: InputDecoration(
-              //       helperText: 'Avatar',
-              //     ),
-              //     validator: (xFiles) =>
-              //         xFiles == null ? 'Please upload attachment' : null,
-              //     builder: (context, xFiles, index) {
-              //       return GridView.builder(
-              //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              //           crossAxisCount: 3,
-              //         ),
-              //         itemCount: xFiles.length + 1,
-              //         itemBuilder: (context, index) {
-              //           index(index);
-              //           final xFile =
-              //               index < xFiles.length ? xFiles[index] : null;
-
-              //           return CircleAvatar(
-              //             radius: 56,
-              //             child: xFile != null
-              //                 ? null
-              //                 : Center(
-              //                     child: Icon(
-              //                       Icons.add_a_photo_outlined,
-              //                       size: 28,
-              //                       color: Colors.white,
-              //                     ),
-              //                   ),
-              //             backgroundImage:
-              //                 xFile != null ? FileImage(File(xFile.path)) : null,
-              //           );
-              //         },
-              //       );
-              //     },
-              //     onSaved: (avatar) {
-              //       print(avatar.toList());
-              //     },
-              //   ),
-              //   height: 500,
-              //   width: 500,
-              // )
+              SizedBox(
+                height: 200,
+                child: ClipListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  key: const ValueKey('avatars'),
+                  initialValues: <String>[
+                    _user.avatar,
+                  ],
+                  quality: 20,
+                  maxHeight: 1024,
+                  decoration: InputDecoration(
+                    helperText: 'Please pick images',
+                  ),
+                  validator: (a) => a!.isEmpty ? 'aa' : null,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  emptyBuilder: (context) {
+                    return CircleAvatar(
+                      radius: 56,
+                      child: Center(
+                        child: Icon(
+                          Icons.add_a_photo_outlined,
+                          size: 28,
+                          color: Colors.white,
+                        ),
+                      ),
+                    );
+                  },
+                  itemBuilder: (context, xFile, index) {
+                    return Card(
+                      child: CircleAvatar(
+                        radius: 56,
+                        child: xFile != null
+                            ? null
+                            : Center(
+                                child: Icon(
+                                  Icons.add_a_photo_outlined,
+                                  size: 28,
+                                  color: Colors.white,
+                                ),
+                              ),
+                        backgroundImage:
+                            xFile != null ? FileImage(File(xFile.path)) : null,
+                      ),
+                    );
+                  },
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                  ),
+                ),
+              )
             ],
           ),
         ),
@@ -209,10 +214,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _submit() {
-    if (_clipKey.currentState.validate()) {
-      _clipKey.currentState.save();
+    if (_clipKey.currentState!.validate()) {
+      _clipKey.currentState!.save();
 
-      print('Done');
+      print('Done || Done');
     }
   }
 }

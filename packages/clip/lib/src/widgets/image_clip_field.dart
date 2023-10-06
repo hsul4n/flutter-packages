@@ -80,80 +80,82 @@ class ImageClipField extends ClipField<XFile> {
                     showModalBottomSheet(
                       context: field.context,
                       builder: (BuildContext context) {
-                        return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            ...sources
-                                .map(
-                                  (source) => ListTile(
-                                    leading: Icon(
-                                      source == ImageSource.camera
-                                          ? Icons.photo_camera_outlined
-                                          : Icons.photo_library_outlined,
+                        return SafeArea(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ...sources
+                                  .map(
+                                    (source) => ListTile(
+                                      leading: Icon(
+                                        source == ImageSource.camera
+                                            ? Icons.photo_camera_outlined
+                                            : Icons.photo_library_outlined,
+                                      ),
+                                      title: Text(
+                                        source == ImageSource.camera
+                                            ? ClipLocalizations.of(context)!
+                                                .camera
+                                            : ClipLocalizations.of(context)!
+                                                .gallery,
+                                      ),
+                                      onTap: () async {
+                                        Navigator.of(field.context).pop();
+
+                                        field.onPause.call();
+
+                                        _imagePicker
+                                            .pickImage(
+                                          source: source,
+                                          imageQuality: quality,
+                                          maxHeight: maxHeight?.toDouble(),
+                                          maxWidth: maxWidth?.toDouble(),
+                                        )
+                                            .then((file) {
+                                          if (file != null) {
+                                            onChangedHandler(XFile(file.path));
+                                          }
+                                        }).whenComplete(field.onResume);
+                                      },
                                     ),
+                                  )
+                                  .toList(),
+                              if (field.value != null) ...[
+                                if (options.contains(ClipOption.zoom))
+                                  ListTile(
+                                    leading: Icon(Icons.zoom_out_map_outlined),
                                     title: Text(
-                                      source == ImageSource.camera
-                                          ? ClipLocalizations.of(context)!
-                                              .camera
-                                          : ClipLocalizations.of(context)!
-                                              .gallery,
-                                    ),
-                                    onTap: () async {
-                                      Navigator.of(field.context).pop();
-
-                                      field.onPause.call();
-
-                                      _imagePicker
-                                          .pickImage(
-                                        source: source,
-                                        imageQuality: quality,
-                                        maxHeight: maxHeight?.toDouble(),
-                                        maxWidth: maxWidth?.toDouble(),
-                                      )
-                                          .then((file) {
-                                        if (file != null) {
-                                          onChangedHandler(XFile(file.path));
-                                        }
-                                      }).whenComplete(field.onResume);
+                                        ClipLocalizations.of(context)!.zoom),
+                                    onTap: () {
+                                      Navigator.of(context)
+                                        ..pop()
+                                        ..push(
+                                          MaterialPageRoute(
+                                              builder: (context) => GalleryPage(
+                                                      attachments: [
+                                                        File(field.value!.path)
+                                                      ])),
+                                        );
                                     },
                                   ),
-                                )
-                                .toList(),
-                            if (field.value != null) ...[
-                              if (options.contains(ClipOption.zoom))
-                                ListTile(
-                                  leading: Icon(Icons.zoom_out_map_outlined),
-                                  title:
-                                      Text(ClipLocalizations.of(context)!.zoom),
-                                  onTap: () {
-                                    Navigator.of(context)
-                                      ..pop()
-                                      ..push(
-                                        MaterialPageRoute(
-                                            builder: (context) => GalleryPage(
-                                                    attachments: [
-                                                      File(field.value!.path)
-                                                    ])),
-                                      );
-                                  },
-                                ),
-                              if (options.contains(ClipOption.delete))
-                                ListTile(
-                                  leading: Icon(
-                                    Icons.delete_outlined,
-                                    color: Colors.red[600],
+                                if (options.contains(ClipOption.delete))
+                                  ListTile(
+                                    leading: Icon(
+                                      Icons.delete_outlined,
+                                      color: Colors.red[600],
+                                    ),
+                                    title: Text(
+                                      ClipLocalizations.of(context)!.remove,
+                                      style: TextStyle(color: Colors.red[600]),
+                                    ),
+                                    onTap: () {
+                                      onChangedHandler(null);
+                                      Navigator.of(context).pop();
+                                    },
                                   ),
-                                  title: Text(
-                                    ClipLocalizations.of(context)!.remove,
-                                    style: TextStyle(color: Colors.red[600]),
-                                  ),
-                                  onTap: () {
-                                    onChangedHandler(null);
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                            ]
-                          ],
+                              ]
+                            ],
+                          ),
                         );
                       },
                     );

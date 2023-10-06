@@ -1,24 +1,15 @@
 import 'dart:io';
 import 'dart:ui' as ui;
-import 'dart:typed_data';
 
 import 'package:clip/l10n/clip_localizations.dart';
-import 'package:clip/src/widgets/gallery_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:clip/clip.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
-typedef ItemWidgetBuilder<ItemType> = Widget Function(
-  BuildContext context,
-  ItemType item,
-  int index,
-);
-
-class ClipGridView extends ClipField<List<XFile>> {
+class ClipListView extends ClipField<List<XFile>> {
   static final _imagePicker = ImagePicker();
 
   final Widget Function(BuildContext)? emptyBuilder;
@@ -37,7 +28,7 @@ class ClipGridView extends ClipField<List<XFile>> {
   /// Corresponds to [SliverChildBuilderDelegate.addSemanticIndexes].
   final bool addSemanticIndexes;
 
-  ClipGridView({
+  ClipListView({
     List<dynamic> initialValues = const [],
     ValueChanged<List<XFile>?>? onChanged,
     ClipFieldSetter<List<XFile>>? onSaved,
@@ -122,8 +113,7 @@ class ClipGridView extends ClipField<List<XFile>> {
                 isCollapsed: true,
                 border: InputBorder.none,
               ),
-              child: GridView.builder(
-                gridDelegate: gridDelegate,
+              child: ListView.builder(
                 itemBuilder: (context, index) {
                   final bool showEmptyBuilder =
                       (emptyBuilder != null && index >= value.length);

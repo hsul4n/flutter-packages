@@ -4,7 +4,7 @@ class User {
 
   final String avatar;
 
-  User({this.id, this.name, this.avatar});
+  const User({required this.id, required this.name, required this.avatar});
 
   User.fromJson(Map<String, dynamic> item)
       : id = item['id'],

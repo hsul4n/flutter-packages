@@ -1,5 +1,6 @@
 export 'src/widgets/image_clip_field.dart';
 export 'src/widgets/clip_grid_view.dart';
+export 'src/widgets/clip_list_view.dart';
 export 'src/widgets/gallery_page.dart';
 
 import 'package:flutter/material.dart';
