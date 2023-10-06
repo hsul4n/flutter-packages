@@ -154,6 +154,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 200,
                 child: ClipListView(
                   shrinkWrap: true,
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(width: 8.0),
                   scrollDirection: Axis.horizontal,
                   key: const ValueKey('avatars'),
                   initialValues: <String>[
@@ -196,9 +198,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     );
                   },
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                  ),
                 ),
               )
             ],
