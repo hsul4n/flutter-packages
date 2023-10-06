@@ -16,8 +16,7 @@ class ClipListView extends ClipField<List<XFile>> {
 
   final ItemWidgetBuilder<XFile> itemBuilder;
 
-  /// Corresponds to [GridView.gridDelegate].
-  final SliverGridDelegate gridDelegate;
+  final IndexedWidgetBuilder separatorBuilder;
 
   /// Corresponds to [SliverChildBuilderDelegate.addAutomaticKeepAlives].
   final bool addAutomaticKeepAlives;
@@ -42,7 +41,7 @@ class ClipListView extends ClipField<List<XFile>> {
     InputDecoration? decoration = const InputDecoration(),
     AutovalidateMode? autovalidateMode,
     required this.itemBuilder,
-    required this.gridDelegate,
+    required this.separatorBuilder,
     this.emptyBuilder,
     // Corresponds to [ScrollView.controller].
     ScrollController? scrollController,
@@ -113,7 +112,7 @@ class ClipListView extends ClipField<List<XFile>> {
                 isCollapsed: true,
                 border: InputBorder.none,
               ),
-              child: ListView.builder(
+              child: ListView.separated(
                 itemBuilder: (context, index) {
                   final bool showEmptyBuilder =
                       (emptyBuilder != null && index >= value.length);
@@ -265,6 +264,7 @@ class ClipListView extends ClipField<List<XFile>> {
                 keyboardDismissBehavior: keyboardDismissBehavior,
                 restorationId: restorationId,
                 clipBehavior: clipBehavior,
+                separatorBuilder: separatorBuilder,
               ),
             );
           },
