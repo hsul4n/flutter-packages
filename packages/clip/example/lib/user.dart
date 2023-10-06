@@ -1,8 +1,8 @@
 class User {
-  final int id;
-  final String name;
+  final int? id;
+  final String? name;
 
-  final String avatar;
+  final String? avatar;
 
   const User({required this.id, required this.name, required this.avatar});
 

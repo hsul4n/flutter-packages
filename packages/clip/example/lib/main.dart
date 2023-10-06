@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     key: const ValueKey('avatars'),
-                    initialValues: <String>[
+                    initialValues: <String?>[
                       _user.avatar,
                     ],
                     quality: 20,
