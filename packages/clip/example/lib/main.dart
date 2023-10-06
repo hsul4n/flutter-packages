@@ -129,18 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       return Card(
                         child: CircleAvatar(
                           radius: 56,
-                          child: xFile != null
-                              ? null
-                              : Center(
-                                  child: Icon(
-                                    Icons.add_a_photo_outlined,
-                                    size: 28,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                          backgroundImage: xFile != null
-                              ? FileImage(File(xFile.path))
-                              : null,
+                          backgroundImage: FileImage(File(xFile.path)),
                         ),
                       );
                     },
@@ -184,17 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     return Card(
                       child: CircleAvatar(
                         radius: 56,
-                        child: xFile != null
-                            ? null
-                            : Center(
-                                child: Icon(
-                                  Icons.add_a_photo_outlined,
-                                  size: 28,
-                                  color: Colors.white,
-                                ),
-                              ),
-                        backgroundImage:
-                            xFile != null ? FileImage(File(xFile.path)) : null,
+                        backgroundImage: FileImage(File(xFile.path)),
                       ),
                     );
                   },

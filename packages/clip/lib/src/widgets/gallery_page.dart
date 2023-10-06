@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:clip/l10n/clip_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -31,7 +30,7 @@ class _GalleryPageState extends State<GalleryPage> {
       backgroundColor: Colors.black,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        leading: const CloseButton(),
+        leading: const CloseButton(color: Colors.white),
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: widget.attachments.length > 1
@@ -44,7 +43,7 @@ class _GalleryPageState extends State<GalleryPage> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: <Color>[
-              Colors.black.withOpacity(0.5),
+              Colors.black.withOpacity(0.8),
               Colors.transparent,
             ],
           )),
