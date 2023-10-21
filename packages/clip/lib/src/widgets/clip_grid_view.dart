@@ -21,7 +21,7 @@ typedef ItemWidgetBuilder<ItemType> = Widget Function(
 class ClipGridView extends ClipField<List<XFile>> {
   static final _imagePicker = ImagePicker();
 
-  final Widget Function(BuildContext)? emptyBuilder;
+  final Widget Function(BuildContext, int index)? emptyBuilder;
 
   final ItemWidgetBuilder<XFile> itemBuilder;
 
@@ -137,7 +137,7 @@ class ClipGridView extends ClipField<List<XFile>> {
 
                   return GestureDetector(
                     child: showEmptyBuilder
-                        ? emptyBuilder(context)
+                        ? emptyBuilder(context, index)
                         : itemBuilder(context, value[index], index),
                     onTap: () {
                       showModalBottomSheet(

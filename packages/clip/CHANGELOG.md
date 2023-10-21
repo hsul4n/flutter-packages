@@ -1,3 +1,11 @@
+# 1.3.1
+
+- Add index to emptyBuilder method.
+
+# 1.3.0
+
+- Add ClipListView widget.
+
 # 1.2.0
 
 - Add gallery page.

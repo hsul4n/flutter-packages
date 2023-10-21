@@ -12,7 +12,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 class ClipListView extends ClipField<List<XFile>> {
   static final _imagePicker = ImagePicker();
 
-  final Widget Function(BuildContext)? emptyBuilder;
+  final Widget Function(BuildContext, int index)? emptyBuilder;
 
   final ItemWidgetBuilder<XFile> itemBuilder;
 
@@ -109,8 +109,12 @@ class ClipListView extends ClipField<List<XFile>> {
             return InputDecorator(
               decoration: effectiveDecoration.copyWith(
                 errorText: field.hasError ? field.errorText : null,
-                isCollapsed: true,
+                helperText: ' ',
                 border: InputBorder.none,
+                errorMaxLines: 2,
+                constraints: BoxConstraints(
+                  maxHeight: 20,
+                ),
               ),
               child: ListView.separated(
                 itemBuilder: (context, index) {
@@ -126,7 +130,7 @@ class ClipListView extends ClipField<List<XFile>> {
 
                   return GestureDetector(
                     child: showEmptyBuilder
-                        ? emptyBuilder(context)
+                        ? emptyBuilder(context, index)
                         : itemBuilder(context, value[index], index),
                     onTap: () {
                       showModalBottomSheet(
