@@ -14,7 +14,7 @@ dependencies:
     sdk: flutter
 
   intl: ^0.18.0
-  attribute_localizations: ^1.0.1
+  attribute_localizations: ^1.0.2
 
 dev_dependencies:
   flutter_test:
