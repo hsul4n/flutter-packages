@@ -108,7 +108,7 @@ class ValidationLocalizationsAr extends ValidationLocalizations {
 
   @override
   String required(String attribute) {
-    return '${attribute} يجب ادخال';
+    return 'يجب ادخال ${attribute}';
   }
 
   @override

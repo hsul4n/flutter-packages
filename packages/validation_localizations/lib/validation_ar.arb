@@ -17,7 +17,7 @@
 	"odd": "يجب أن يكون {attribute} عدداً فردياً",
 	"otherThan": "{count, plural,=0{طول {attribute} يجب ألاّ يكون صفر حرف}=1{طول {attribute} يجب ألاّ يكون حرفاً واحداً}=2{طول {attribute} يجب ألاّ يكون حرفان}few{طول {attribute} يجب ألاّ يكون {count} أحرف}other{طول {attribute} يجب ألاّ يكون {count} حرفاً}}",
 	"present": "يجب ترك حقل {attribute} فارغاً",
-	"required": "{attribute} يجب ادخال",
+	"required": "يجب ادخال {attribute}",
 	"taken": "حقل {attribute} محجوز مسبقاً",
 	"tooLong": "{count, plural,=0{محتوى {attribute} أطول من اللّازم (الحد الأقصى هو ولا حرف)}=1{محتوى {attribute} أطول من اللّازم (الحد الأقصى هو حرف واحد)}=2{محتوى {attribute} أطول من اللّازم (الحد الأقصى هو حرفان)}few{محتوى {attribute} أطول من اللّازم (الحد الأقصى هو {count} حروف)}other{محتوى {attribute} أطول من اللّازم (الحد الأقصى هو {count} حرف)}",
 	"tooShort": "{count, plural,=0{محتوى {attribute} أقصر من اللّازم (الحد الأدنى هو ولا حرف)}=1{محتوى {attribute} أقصر من اللّازم (الحد الأدنى هو حرف واحد)}=2{محتوى {attribute} أقصر من اللّازم (الحد الأدنى هو حرفان)}few{محتوى {attribute} أقصر من اللّازم (الحد الأدنى هو {count} حروف)}other{محتوى {attribute} أقصر من اللّازم (الحد الأدنى هو {count} حرف)}",
