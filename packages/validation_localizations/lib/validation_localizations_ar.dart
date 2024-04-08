@@ -1,4 +1,3 @@
-
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
 import 'validation_localizations.dart';
@@ -109,7 +108,7 @@ class ValidationLocalizationsAr extends ValidationLocalizations {
 
   @override
   String required(String attribute) {
-    return '${attribute} يجب ان يحتوي على قيمه';
+    return '${attribute} يجب ادخال';
   }
 
   @override
@@ -151,8 +150,10 @@ class ValidationLocalizationsAr extends ValidationLocalizations {
       zero: 'طول ${attribute} غير مطابق للحد المطلوب (يجب أن يكون ولا حرف)',
       one: 'طول ${attribute} غير مطابق للحد المطلوب (يجب أن يكون حرف واحد)',
       two: 'طول ${attribute} غير مطابق للحد المطلوب (يجب أن يكون حرفان)',
-      few: 'طول ${attribute} غير مطابق للحد المطلوب (يجب أن يكون ${count} أحرف)',
-      other: 'طول ${attribute} غير مطابق للحد المطلوب (يجب أن يكون ${count} حرف)',
+      few:
+          'طول ${attribute} غير مطابق للحد المطلوب (يجب أن يكون ${count} أحرف)',
+      other:
+          'طول ${attribute} غير مطابق للحد المطلوب (يجب أن يكون ${count} حرف)',
     );
   }
 }

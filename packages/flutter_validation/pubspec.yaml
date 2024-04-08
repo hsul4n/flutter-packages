@@ -26,7 +26,7 @@ dependencies:
 
   # localizations
   attribute_localizations: ^1.0.2
-  validation_localizations: ^1.0.4
+  validation_localizations: ^1.0.5
 
 dev_dependencies:
   flutter_test:

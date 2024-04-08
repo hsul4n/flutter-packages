@@ -16,7 +16,7 @@ packages:
       sha256: fe28fd320a9ec0d5e09f7637c43231bcee3e8b7856992cc2eeecefe847a21cd3
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   boolean_selector:
     dependency: transitive
     description:
