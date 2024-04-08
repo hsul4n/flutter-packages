@@ -152,7 +152,7 @@
       }
     }
   },
-  "required": "{attribute} must exist",
+  "required": "You must enter {attribute}",
   "@required": {
     "placeholders": {
       "attribute": {

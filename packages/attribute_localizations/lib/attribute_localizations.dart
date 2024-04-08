@@ -1,7 +1,5 @@
-
 import 'dart:async';
 
-// ignore: unused_import
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,14 +8,14 @@ import 'package:intl/intl.dart' as intl;
 import 'attribute_localizations_ar.dart';
 import 'attribute_localizations_en.dart';
 
-/// Callers can lookup localized strings with an instance of AttributeLocalizations returned
-/// by `AttributeLocalizations.of(context)`.
+/// Callers can lookup localized strings with an instance of AttributeLocalizations
+/// returned by `AttributeLocalizations.of(context)`.
 ///
 /// Applications need to include `AttributeLocalizations.delegate()` in their app's
-/// localizationDelegates list, and the locales they support in the app's
-/// supportedLocales list. For example:
+/// `localizationDelegates` list, and the locales they support in the app's
+/// `supportedLocales` list. For example:
 ///
-/// ```
+/// ```dart
 /// import 'lib/attribute_localizations.dart';
 ///
 /// return MaterialApp(
@@ -32,14 +30,14 @@ import 'attribute_localizations_en.dart';
 /// Please make sure to update your pubspec.yaml to include the following
 /// packages:
 ///
-/// ```
+/// ```yaml
 /// dependencies:
 ///   # Internationalization support.
 ///   flutter_localizations:
 ///     sdk: flutter
 ///   intl: any # Use the pinned version from flutter_localizations
 ///
-///   # rest of dependencies
+///   # Rest of dependencies
 /// ```
 ///
 /// ## iOS Applications
@@ -64,7 +62,6 @@ import 'attribute_localizations_en.dart';
 abstract class AttributeLocalizations {
   AttributeLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
-  // ignore: unused_field
   final String localeName;
 
   static AttributeLocalizations? of(BuildContext context) {
@@ -117,13 +114,19 @@ abstract class AttributeLocalizations {
   /// No description provided for @firstName.
   ///
   /// In en, this message translates to:
-  /// **'firstName'**
+  /// **'First name'**
   String get firstName;
+
+  /// No description provided for @middleName.
+  ///
+  /// In en, this message translates to:
+  /// **'Middle name'**
+  String get middleName;
 
   /// No description provided for @lastName.
   ///
   /// In en, this message translates to:
-  /// **'lastName'**
+  /// **'Last name'**
   String get lastName;
 
   /// No description provided for @password.
@@ -159,7 +162,7 @@ abstract class AttributeLocalizations {
   /// No description provided for @phone.
   ///
   /// In en, this message translates to:
-  /// **'Phone'**
+  /// **'Phone number'**
   String get phone;
 
   /// No description provided for @mobile.
@@ -294,7 +297,7 @@ class _AttributeLocalizationsDelegate extends LocalizationsDelegate<AttributeLoc
 
   @override
   Future<AttributeLocalizations> load(Locale locale) {
-    return SynchronousFuture<AttributeLocalizations>(_lookupAttributeLocalizations(locale));
+    return SynchronousFuture<AttributeLocalizations>(lookupAttributeLocalizations(locale));
   }
 
   @override
@@ -304,16 +307,14 @@ class _AttributeLocalizationsDelegate extends LocalizationsDelegate<AttributeLoc
   bool shouldReload(_AttributeLocalizationsDelegate old) => false;
 }
 
-AttributeLocalizations _lookupAttributeLocalizations(Locale locale) {
-  
+AttributeLocalizations lookupAttributeLocalizations(Locale locale) {
 
 
-// Lookup logic when only language code is specified.
-switch (locale.languageCode) {
-  case 'ar': return AttributeLocalizationsAr();
+  // Lookup logic when only language code is specified.
+  switch (locale.languageCode) {
+    case 'ar': return AttributeLocalizationsAr();
     case 'en': return AttributeLocalizationsEn();
-}
-
+  }
 
   throw FlutterError(
     'AttributeLocalizations.delegate failed to load unsupported locale "$locale". This is likely '

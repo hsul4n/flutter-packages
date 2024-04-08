@@ -1,9 +1,4 @@
-
-// ignore: unused_import
-import 'package:intl/intl.dart' as intl;
 import 'attribute_localizations.dart';
-
-// ignore_for_file: unnecessary_brace_in_string_interps
 
 /// The translations for English (`en`).
 class AttributeLocalizationsEn extends AttributeLocalizations {
@@ -19,10 +14,13 @@ class AttributeLocalizationsEn extends AttributeLocalizations {
   String get email => 'Email address';
 
   @override
-  String get firstName => 'firstName';
+  String get firstName => 'First name';
 
   @override
-  String get lastName => 'lastName';
+  String get middleName => 'Middle name';
+
+  @override
+  String get lastName => 'Last name';
 
   @override
   String get password => 'Password';
@@ -40,7 +38,7 @@ class AttributeLocalizationsEn extends AttributeLocalizations {
   String get address => 'Address';
 
   @override
-  String get phone => 'Phone';
+  String get phone => 'Phone number';
 
   @override
   String get mobile => 'Mobile';

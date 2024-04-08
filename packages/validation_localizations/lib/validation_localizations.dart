@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 // ignore: unused_import
@@ -62,16 +61,19 @@ import 'validation_localizations_en.dart';
 /// be consistent with the languages listed in the ValidationLocalizations.supportedLocales
 /// property.
 abstract class ValidationLocalizations {
-  ValidationLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  ValidationLocalizations(String locale)
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   // ignore: unused_field
   final String localeName;
 
   static ValidationLocalizations? of(BuildContext context) {
-    return Localizations.of<ValidationLocalizations>(context, ValidationLocalizations);
+    return Localizations.of<ValidationLocalizations>(
+        context, ValidationLocalizations);
   }
 
-  static const LocalizationsDelegate<ValidationLocalizations> delegate = _ValidationLocalizationsDelegate();
+  static const LocalizationsDelegate<ValidationLocalizations> delegate =
+      _ValidationLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,7 +85,8 @@ abstract class ValidationLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -207,7 +210,7 @@ abstract class ValidationLocalizations {
   /// No description provided for @required.
   ///
   /// In en, this message translates to:
-  /// **'{attribute} must exist'**
+  /// **'You must enter {attribute}'**
   String required(String attribute);
 
   /// No description provided for @taken.
@@ -235,36 +238,36 @@ abstract class ValidationLocalizations {
   String wrongLength(String attribute, int count);
 }
 
-class _ValidationLocalizationsDelegate extends LocalizationsDelegate<ValidationLocalizations> {
+class _ValidationLocalizationsDelegate
+    extends LocalizationsDelegate<ValidationLocalizations> {
   const _ValidationLocalizationsDelegate();
 
   @override
   Future<ValidationLocalizations> load(Locale locale) {
-    return SynchronousFuture<ValidationLocalizations>(_lookupValidationLocalizations(locale));
+    return SynchronousFuture<ValidationLocalizations>(
+        _lookupValidationLocalizations(locale));
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_ValidationLocalizationsDelegate old) => false;
 }
 
 ValidationLocalizations _lookupValidationLocalizations(Locale locale) {
-  
-
-
 // Lookup logic when only language code is specified.
-switch (locale.languageCode) {
-  case 'ar': return ValidationLocalizationsAr();
-    case 'en': return ValidationLocalizationsEn();
-}
-
+  switch (locale.languageCode) {
+    case 'ar':
+      return ValidationLocalizationsAr();
+    case 'en':
+      return ValidationLocalizationsEn();
+  }
 
   throw FlutterError(
-    'ValidationLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
-  );
+      'ValidationLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

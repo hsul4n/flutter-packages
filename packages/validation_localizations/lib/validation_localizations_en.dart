@@ -1,4 +1,3 @@
-
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
 import 'validation_localizations.dart';
@@ -105,7 +104,7 @@ class ValidationLocalizationsEn extends ValidationLocalizations {
 
   @override
   String required(String attribute) {
-    return '${attribute} must exist';
+    return 'You must enter ${attribute}';
   }
 
   @override

@@ -1,9 +1,4 @@
-
-// ignore: unused_import
-import 'package:intl/intl.dart' as intl;
 import 'attribute_localizations.dart';
-
-// ignore_for_file: unnecessary_brace_in_string_interps
 
 /// The translations for Arabic (`ar`).
 class AttributeLocalizationsAr extends AttributeLocalizations {
@@ -19,10 +14,13 @@ class AttributeLocalizationsAr extends AttributeLocalizations {
   String get email => 'البريد الالكتروني';
 
   @override
-  String get firstName => 'الاسم';
+  String get firstName => 'الاسم الاول';
 
   @override
-  String get lastName => 'اسم العائلة';
+  String get middleName => 'الاسم الاوسط';
+
+  @override
+  String get lastName => 'الاسم الاخير/اللقب';
 
   @override
   String get password => 'كلمة المرور';
@@ -40,7 +38,7 @@ class AttributeLocalizationsAr extends AttributeLocalizations {
   String get address => 'العنوان';
 
   @override
-  String get phone => 'الهاتف';
+  String get phone => 'رقم الهاتف';
 
   @override
   String get mobile => 'الجوال';
