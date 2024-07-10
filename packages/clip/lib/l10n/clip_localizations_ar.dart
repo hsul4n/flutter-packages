@@ -1,6 +1,3 @@
-
-
-
 import 'clip_localizations.dart';
 
 /// The translations for Arabic (`ar`).

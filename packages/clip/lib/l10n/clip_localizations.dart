@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -10,14 +9,14 @@ import 'clip_localizations_ar.dart';
 import 'clip_localizations_en.dart';
 import 'clip_localizations_fr.dart';
 
-/// Callers can lookup localized strings with an instance of ClipLocalizations returned
-/// by `ClipLocalizations.of(context)`.
+/// Callers can lookup localized strings with an instance of ClipLocalizations
+/// returned by `ClipLocalizations.of(context)`.
 ///
 /// Applications need to include `ClipLocalizations.delegate()` in their app's
-/// localizationDelegates list, and the locales they support in the app's
-/// supportedLocales list. For example:
+/// `localizationDelegates` list, and the locales they support in the app's
+/// `supportedLocales` list. For example:
 ///
-/// ```
+/// ```dart
 /// import 'l10n/clip_localizations.dart';
 ///
 /// return MaterialApp(
@@ -32,14 +31,14 @@ import 'clip_localizations_fr.dart';
 /// Please make sure to update your pubspec.yaml to include the following
 /// packages:
 ///
-/// ```
+/// ```yaml
 /// dependencies:
 ///   # Internationalization support.
 ///   flutter_localizations:
 ///     sdk: flutter
 ///   intl: any # Use the pinned version from flutter_localizations
 ///
-///   # rest of dependencies
+///   # Rest of dependencies
 /// ```
 ///
 /// ## iOS Applications
@@ -120,10 +119,10 @@ abstract class ClipLocalizations {
   /// **'Remove'**
   String get remove;
 
-  /// No description provided for @remove.
+  /// No description provided for @ofMany.
   ///
   /// In en, this message translates to:
-  /// **'Remove'**
+  /// **'Of'**
   String get ofMany;
 }
 
@@ -132,7 +131,7 @@ class _ClipLocalizationsDelegate extends LocalizationsDelegate<ClipLocalizations
 
   @override
   Future<ClipLocalizations> load(Locale locale) {
-    return SynchronousFuture<ClipLocalizations>(_lookupClipLocalizations(locale));
+    return SynchronousFuture<ClipLocalizations>(lookupClipLocalizations(locale));
   }
 
   @override
@@ -142,17 +141,15 @@ class _ClipLocalizationsDelegate extends LocalizationsDelegate<ClipLocalizations
   bool shouldReload(_ClipLocalizationsDelegate old) => false;
 }
 
-ClipLocalizations _lookupClipLocalizations(Locale locale) {
-  
+ClipLocalizations lookupClipLocalizations(Locale locale) {
 
 
-// Lookup logic when only language code is specified.
-switch (locale.languageCode) {
-  case 'ar': return ClipLocalizationsAr();
+  // Lookup logic when only language code is specified.
+  switch (locale.languageCode) {
+    case 'ar': return ClipLocalizationsAr();
     case 'en': return ClipLocalizationsEn();
     case 'fr': return ClipLocalizationsFr();
-}
-
+  }
 
   throw FlutterError(
     'ClipLocalizations.delegate failed to load unsupported locale "$locale". This is likely '

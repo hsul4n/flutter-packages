@@ -133,26 +133,30 @@ class _MyHomePageState extends State<MyHomePage> {
               //     crossAxisCount: 3,
               //   ),
               // ),
-              Container(
-                height: 126,
-                color: Colors.red,
+              SizedBox(
+                height: 156,
                 child: ClipListView(
                   shrinkWrap: true,
                   separatorBuilder: (context, index) =>
                       const SizedBox(width: 8.0),
-                  scrollDirection: Axis.horizontal,
                   key: const ValueKey('avatars'),
                   initialValues: <String>[
+                    _user.avatar!,
+                    _user.avatar!,
+                    _user.avatar!,
+                    _user.avatar!,
+                    _user.avatar!,
+                    _user.avatar!,
+                    _user.avatar!,
                     _user.avatar!,
                   ],
                   quality: 20,
                   maxHeight: 1024,
                   validator: (a) => 'aa',
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  emptyBuilder: (context) {
-                    return SizedBox(
-                      height: 56,
-                      width: 56,
+                  emptyBuilder: (context, index) {
+                    return AspectRatio(
+                      aspectRatio: 1,
                       child: CircleAvatar(
                         radius: 56,
                         child: Center(
@@ -166,9 +170,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   },
                   itemBuilder: (context, xFile, index) {
-                    return SizedBox(
-                      height: 56,
-                      width: 56,
+                    return AspectRatio(
+                      aspectRatio: 1,
                       child: Card(
                         child: CircleAvatar(
                           radius: 56,

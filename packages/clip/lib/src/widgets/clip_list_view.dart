@@ -16,7 +16,7 @@ class ClipListView extends ClipField<List<XFile>> {
 
   final ItemWidgetBuilder<XFile> itemBuilder;
 
-  final IndexedWidgetBuilder separatorBuilder;
+  final IndexedWidgetBuilder? separatorBuilder;
 
   /// Corresponds to [SliverChildBuilderDelegate.addAutomaticKeepAlives].
   final bool addAutomaticKeepAlives;
@@ -31,6 +31,7 @@ class ClipListView extends ClipField<List<XFile>> {
     List<dynamic> initialValues = const [],
     ValueChanged<List<XFile>?>? onChanged,
     ClipFieldSetter<List<XFile>>? onSaved,
+    BoxConstraints constraints = const BoxConstraints(),
     int quality = 100,
     int? maxHeight,
     int? maxWidth,
@@ -41,12 +42,12 @@ class ClipListView extends ClipField<List<XFile>> {
     InputDecoration? decoration = const InputDecoration(),
     AutovalidateMode? autovalidateMode,
     required this.itemBuilder,
-    required this.separatorBuilder,
+    this.separatorBuilder,
     this.emptyBuilder,
     // Corresponds to [ScrollView.controller].
     ScrollController? scrollController,
     // Corresponds to [ScrollView.scrollDirection].
-    Axis scrollDirection = Axis.vertical,
+    Axis scrollDirection = Axis.horizontal,
     // Corresponds to [ScrollView.reverse].
     bool reverse = false,
     // Corresponds to [ScrollView.primary].
@@ -109,12 +110,8 @@ class ClipListView extends ClipField<List<XFile>> {
             return InputDecorator(
               decoration: effectiveDecoration.copyWith(
                 errorText: field.hasError ? field.errorText : null,
-                helperText: ' ',
                 border: InputBorder.none,
                 errorMaxLines: 2,
-                constraints: BoxConstraints(
-                  maxHeight: 20,
-                ),
               ),
               child: ListView.separated(
                 itemBuilder: (context, index) {
@@ -268,7 +265,8 @@ class ClipListView extends ClipField<List<XFile>> {
                 keyboardDismissBehavior: keyboardDismissBehavior,
                 restorationId: restorationId,
                 clipBehavior: clipBehavior,
-                separatorBuilder: separatorBuilder,
+                separatorBuilder: separatorBuilder ??
+                    (context, index) => const SizedBox(width: 8.0),
               ),
             );
           },
