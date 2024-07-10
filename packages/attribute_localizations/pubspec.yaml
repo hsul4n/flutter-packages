@@ -1,6 +1,6 @@
 name: attribute_localizations
 description: Attribute localizations.
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/hsul4n/flutter-packages
 
 environment:
