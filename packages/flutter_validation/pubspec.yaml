@@ -14,10 +14,7 @@ dependencies:
     sdk: flutter
 
   # validations
-  phone_numbers_parser:
-    git:
-      url: https://github.com/hsul4n/phone_numbers_parser
-      ref: 7.0.1
+  phone_numbers_parser: ^9.0.1
 
   form_field_validator:
     git:
