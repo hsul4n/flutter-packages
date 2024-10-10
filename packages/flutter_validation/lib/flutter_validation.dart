@@ -12,7 +12,6 @@ export 'package:attribute_localizations/attribute_localizations.dart'
     show AttributeLocalizations;
 export 'package:validation_localizations/validation_localizations.dart'
     show ValidationLocalizations;
-export 'package:dart_countries/src/generated/iso_codes.enum.dart';
 
 class Validator {
   final BuildContext _context;
