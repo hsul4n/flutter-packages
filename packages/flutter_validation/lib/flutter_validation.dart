@@ -26,11 +26,11 @@ class Validator {
 
   MultiValidator required(String attribute) => MultiValidator([
         NullableValidator(
-            errorText:
-                ValidationLocalizations.of(_context)!.required(attribute)),
+            errorText: ValidationLocalizations.of(_context)!
+                .required(attribute.toLowerCase())),
         RequiredValidator(
-            errorText:
-                ValidationLocalizations.of(_context)!.required(attribute))
+            errorText: ValidationLocalizations.of(_context)!
+                .required(attribute.toLowerCase()))
       ]);
 
   TextFieldValidator get name =>
@@ -66,7 +66,7 @@ class Validator {
       ExpressionValidator(
         (_value) => _value == otherValue(),
         errorText: ValidationLocalizations.of(_context)!
-            .confirmation(attribute, otherAttribute),
+            .confirmation(attribute, otherAttribute.toLowerCase()),
       );
 
   TextFieldValidator contains(String attribute, List<dynamic> items) =>
@@ -79,24 +79,24 @@ class Validator {
           min: count,
           max: count,
           errorText: ValidationLocalizations.of(_context)!
-              .wrongLength(attribute, count));
+              .wrongLength(attribute.toLowerCase(), count));
 
   TextFieldValidator minLength(String attribute, int count) =>
       MinLengthValidator(count,
-          errorText:
-              ValidationLocalizations.of(_context)!.tooShort(attribute, count));
+          errorText: ValidationLocalizations.of(_context)!
+              .tooShort(attribute.toLowerCase(), count));
 
   TextFieldValidator maxLength(String attribute, int count) =>
       MaxLengthValidator(count,
-          errorText:
-              ValidationLocalizations.of(_context)!.tooLong(attribute, count));
+          errorText: ValidationLocalizations.of(_context)!
+              .tooLong(attribute.toLowerCase(), count));
 
   MultiValidator lessThan(String attribute, num count) => MultiValidator([
         isNum(attribute),
         ExpressionValidator(
           (String? value) => num.parse(value!) < count,
-          errorText:
-              ValidationLocalizations.of(_context)!.lessThan(attribute, count),
+          errorText: ValidationLocalizations.of(_context)!
+              .lessThan(attribute.toLowerCase(), count),
         )
       ]);
 
@@ -106,7 +106,7 @@ class Validator {
         ExpressionValidator(
           (String? value) => num.parse(value!) <= count,
           errorText: ValidationLocalizations.of(_context)!
-              .lessThanOrEqualTo(attribute, count),
+              .lessThanOrEqualTo(attribute.toLowerCase(), count),
         )
       ]);
 
@@ -115,7 +115,7 @@ class Validator {
         ExpressionValidator(
           (String? value) => num.parse(value!) > count,
           errorText: ValidationLocalizations.of(_context)!
-              .greaterThan(attribute, count),
+              .greaterThan(attribute.toLowerCase(), count),
         ),
       ]);
 
@@ -124,7 +124,7 @@ class Validator {
         isNum(attribute),
         ExpressionValidator((String? value) => num.parse(value!) >= count,
             errorText: ValidationLocalizations.of(_context)!
-                .greaterThanOrEqualTo(attribute, count)),
+                .greaterThanOrEqualTo(attribute.toLowerCase(), count)),
       ]);
 
   TextFieldValidator dateFormat(String format) => DateValidator(format,
