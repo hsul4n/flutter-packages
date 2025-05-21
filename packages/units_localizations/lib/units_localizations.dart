@@ -8,6 +8,8 @@ import 'package:intl/intl.dart' as intl;
 import 'units_localizations_ar.dart';
 import 'units_localizations_en.dart';
 
+// ignore_for_file: type=lint
+
 /// Callers can lookup localized strings with an instance of UnitsLocalizations
 /// returned by `UnitsLocalizations.of(context)`.
 ///
@@ -60,7 +62,8 @@ import 'units_localizations_en.dart';
 /// be consistent with the languages listed in the UnitsLocalizations.supportedLocales
 /// property.
 abstract class UnitsLocalizations {
-  UnitsLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  UnitsLocalizations(String locale)
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -68,7 +71,8 @@ abstract class UnitsLocalizations {
     return Localizations.of<UnitsLocalizations>(context, UnitsLocalizations);
   }
 
-  static const LocalizationsDelegate<UnitsLocalizations> delegate = _UnitsLocalizationsDelegate();
+  static const LocalizationsDelegate<UnitsLocalizations> delegate =
+      _UnitsLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -80,7 +84,8 @@ abstract class UnitsLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -460,34 +465,36 @@ abstract class UnitsLocalizations {
   String liters(num volume);
 }
 
-class _UnitsLocalizationsDelegate extends LocalizationsDelegate<UnitsLocalizations> {
+class _UnitsLocalizationsDelegate
+    extends LocalizationsDelegate<UnitsLocalizations> {
   const _UnitsLocalizationsDelegate();
 
   @override
   Future<UnitsLocalizations> load(Locale locale) {
-    return SynchronousFuture<UnitsLocalizations>(lookupUnitsLocalizations(locale));
+    return SynchronousFuture<UnitsLocalizations>(
+        lookupUnitsLocalizations(locale));
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_UnitsLocalizationsDelegate old) => false;
 }
 
 UnitsLocalizations lookupUnitsLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar': return UnitsLocalizationsAr();
-    case 'en': return UnitsLocalizationsEn();
+    case 'ar':
+      return UnitsLocalizationsAr();
+    case 'en':
+      return UnitsLocalizationsEn();
   }
 
   throw FlutterError(
-    'UnitsLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
-  );
+      'UnitsLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

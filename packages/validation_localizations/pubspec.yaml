@@ -1,11 +1,10 @@
 name: validation_localizations
 description: Validation localizations.
-version: 1.0.7
+version: 1.0.9
 homepage: https://github.com/hsul4n/flutter-packages
 
 environment:
-  sdk: ">=2.19.2 <4.0.0"
-  flutter: ">=1.17.0"
+  sdk: ^3.6.0
 
 dependencies:
   flutter:
@@ -13,8 +12,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  intl: ^0.19.0
-  attribute_localizations: ^1.0.3
+  intl: ^0.20.2
+  attribute_localizations: ^1.0.5
 
 dev_dependencies:
   flutter_test:

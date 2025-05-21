@@ -13,19 +13,19 @@ enum ClipOption {
   delete,
 }
 
-class ImageClipField extends ClipField<XFile> {
+class ImageClipField extends FormField<XFile> {
   static final _imagePicker = ImagePicker();
 
   ImageClipField({
-    Key? key,
+    super.key,
     required Widget Function(BuildContext, XFile?) builder,
     dynamic initialValue,
     ValueChanged<XFile?>? onChanged,
-    ClipFieldSetter<XFile>? onSaved,
+    FormFieldSetter<XFile>? onSaved,
     int quality = 100,
     int? maxHeight,
     int? maxWidth,
-    ClipFieldValidator<XFile>? validator,
+    FormFieldValidator<XFile>? validator,
     List<ImageSource> sources = const [ImageSource.camera, ImageSource.gallery],
     List<ClipOption> options = const [ClipOption.zoom, ClipOption.delete],
     bool? enabled,
@@ -34,36 +34,32 @@ class ImageClipField extends ClipField<XFile> {
   })  : assert(sources.isNotEmpty),
         assert(options.isNotEmpty),
         super(
-          key: key,
           autovalidateMode: autovalidateMode,
-          initialValue: () async {
-            if (initialValue != null) {
-              if (initialValue is String) {
-                return DefaultCacheManager()
-                    .getSingleFile(initialValue)
-                    .then((value) => XFile(value.path));
-              } else if (initialValue is Uint8List)
-                return Future.value(XFile(File.fromRawPath(initialValue).path));
-              else
-                throw UnsupportedError('cant get base64');
-            }
-
-            return null;
-          },
           onSaved: onSaved,
           validator: validator,
           enabled: enabled ?? decoration?.enabled ?? true,
-          builder: (ClipFieldState<XFile> field) {
+          builder: (FormFieldState<XFile> field) {
+            if (!field.hasInteractedByUser) {
+              () async {
+                if (initialValue != null) {
+                  if (initialValue is String) {
+                    return DefaultCacheManager()
+                        .getSingleFile(initialValue)
+                        .then((value) => XFile(value.path));
+                  } else if (initialValue is Uint8List)
+                    return Future.value(
+                        XFile(File.fromRawPath(initialValue).path));
+                  else
+                    throw UnsupportedError('cant get base64');
+                }
+
+                return null;
+              }.call().then(field.didChange);
+            }
+
             final InputDecoration effectiveDecoration = (decoration ??
                     const InputDecoration())
                 .applyDefaults(Theme.of(field.context).inputDecorationTheme);
-
-            void onChangedHandler(XFile? value) {
-              field.didChange(value);
-              if (onChanged != null) {
-                onChanged(value);
-              }
-            }
 
             return IntrinsicWidth(
               child: InputDecorator(
@@ -101,20 +97,26 @@ class ImageClipField extends ClipField<XFile> {
                                       onTap: () async {
                                         Navigator.of(field.context).pop();
 
-                                        field.onPause.call();
+                                        // field.onPause.call();
 
                                         _imagePicker
                                             .pickImage(
-                                          source: source,
-                                          imageQuality: quality,
-                                          maxHeight: maxHeight?.toDouble(),
-                                          maxWidth: maxWidth?.toDouble(),
-                                        )
-                                            .then((file) {
-                                          if (file != null) {
-                                            onChangedHandler(XFile(file.path));
+                                              source: source,
+                                              imageQuality: quality,
+                                              maxHeight: maxHeight?.toDouble(),
+                                              maxWidth: maxWidth?.toDouble(),
+                                            )
+                                            .then((file) => file != null
+                                                ? XFile(file.path)
+                                                : null)
+                                            .then((xFile) {
+                                          if (xFile != null) {
+                                            field.didChange(xFile);
+                                            onChanged?.call(xFile);
                                           }
-                                        }).whenComplete(field.onResume);
+                                        });
+
+                                        //.whenComplete(field.onResume);
                                       },
                                     ),
                                   )
@@ -148,7 +150,9 @@ class ImageClipField extends ClipField<XFile> {
                                       style: TextStyle(color: Colors.red[600]),
                                     ),
                                     onTap: () {
-                                      onChangedHandler(null);
+                                      field.didChange(null);
+                                      onChanged?.call(null);
+
                                       Navigator.of(context).pop();
                                     },
                                   ),
@@ -169,7 +173,7 @@ class ImageClipField extends ClipField<XFile> {
   _ImageClipFieldState createState() => _ImageClipFieldState();
 }
 
-class _ImageClipFieldState extends ClipFieldState<XFile> {
+class _ImageClipFieldState extends FormFieldState<XFile> {
   @override
   ImageClipField get widget => super.widget as ImageClipField;
 }

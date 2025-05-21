@@ -1,3 +1,8 @@
+# 1.1.1
+
+- Update dart sdk to ^3.6.0.
+- Update intl to ^20.0.2.
+
 # 1.1.0
 
 - Improve phone validation.

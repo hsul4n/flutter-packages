@@ -8,6 +8,8 @@ import 'package:intl/intl.dart' as intl;
 import 'attribute_localizations_ar.dart';
 import 'attribute_localizations_en.dart';
 
+// ignore_for_file: type=lint
+
 /// Callers can lookup localized strings with an instance of AttributeLocalizations
 /// returned by `AttributeLocalizations.of(context)`.
 ///
@@ -60,15 +62,18 @@ import 'attribute_localizations_en.dart';
 /// be consistent with the languages listed in the AttributeLocalizations.supportedLocales
 /// property.
 abstract class AttributeLocalizations {
-  AttributeLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AttributeLocalizations(String locale)
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
   static AttributeLocalizations? of(BuildContext context) {
-    return Localizations.of<AttributeLocalizations>(context, AttributeLocalizations);
+    return Localizations.of<AttributeLocalizations>(
+        context, AttributeLocalizations);
   }
 
-  static const LocalizationsDelegate<AttributeLocalizations> delegate = _AttributeLocalizationsDelegate();
+  static const LocalizationsDelegate<AttributeLocalizations> delegate =
+      _AttributeLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -80,7 +85,8 @@ abstract class AttributeLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -292,34 +298,36 @@ abstract class AttributeLocalizations {
   String get q;
 }
 
-class _AttributeLocalizationsDelegate extends LocalizationsDelegate<AttributeLocalizations> {
+class _AttributeLocalizationsDelegate
+    extends LocalizationsDelegate<AttributeLocalizations> {
   const _AttributeLocalizationsDelegate();
 
   @override
   Future<AttributeLocalizations> load(Locale locale) {
-    return SynchronousFuture<AttributeLocalizations>(lookupAttributeLocalizations(locale));
+    return SynchronousFuture<AttributeLocalizations>(
+        lookupAttributeLocalizations(locale));
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AttributeLocalizationsDelegate old) => false;
 }
 
 AttributeLocalizations lookupAttributeLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar': return AttributeLocalizationsAr();
-    case 'en': return AttributeLocalizationsEn();
+    case 'ar':
+      return AttributeLocalizationsAr();
+    case 'en':
+      return AttributeLocalizationsEn();
   }
 
   throw FlutterError(
-    'AttributeLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
-  );
+      'AttributeLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

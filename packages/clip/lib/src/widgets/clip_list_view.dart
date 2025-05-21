@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui' as ui;
 
 import 'package:clip/l10n/clip_localizations.dart';
 import 'package:flutter/foundation.dart';
@@ -9,14 +8,16 @@ import 'package:clip/clip.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
-class ClipListView extends ClipField<List<XFile>> {
+class ClipListView extends FormField<List<XFile>> {
   static final _imagePicker = ImagePicker();
 
-  final Widget Function(BuildContext, int index)? emptyBuilder;
+  final Widget Function(BuildContext)? footer;
 
   final ItemWidgetBuilder<XFile> itemBuilder;
 
   final IndexedWidgetBuilder? separatorBuilder;
+
+  final ReorderCallback? onReorder;
 
   /// Corresponds to [SliverChildBuilderDelegate.addAutomaticKeepAlives].
   final bool addAutomaticKeepAlives;
@@ -29,13 +30,14 @@ class ClipListView extends ClipField<List<XFile>> {
 
   ClipListView({
     List<dynamic> initialValues = const [],
-    ValueChanged<List<XFile>?>? onChanged,
-    ClipFieldSetter<List<XFile>>? onSaved,
+    void Function(int index, List<XFile?>? value)? onChanged,
+    void Function(int index)? onTap,
+    FormFieldSetter<List<XFile>>? onSaved,
     BoxConstraints constraints = const BoxConstraints(),
     int quality = 100,
     int? maxHeight,
     int? maxWidth,
-    ClipFieldValidator<List<XFile>>? validator,
+    FormFieldValidator<List<XFile>>? validator,
     List<ImageSource> sources = const [ImageSource.camera, ImageSource.gallery],
     List<ClipOption> options = const [ClipOption.zoom, ClipOption.delete],
     bool? enabled,
@@ -43,7 +45,8 @@ class ClipListView extends ClipField<List<XFile>> {
     AutovalidateMode? autovalidateMode,
     required this.itemBuilder,
     this.separatorBuilder,
-    this.emptyBuilder,
+    this.footer,
+    this.onReorder,
     // Corresponds to [ScrollView.controller].
     ScrollController? scrollController,
     // Corresponds to [ScrollView.scrollDirection].
@@ -56,8 +59,10 @@ class ClipListView extends ClipField<List<XFile>> {
     ScrollPhysics? physics,
     // Corresponds to [ScrollView.shrinkWrap].
     bool shrinkWrap = false,
+    // Corresponds to [ScrollView.shrinkWrap].
+    bool reorderable = true,
     // Corresponds to [BoxScrollView.padding].
-    EdgeInsetsGeometry? padding,
+    EdgeInsets? padding,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
@@ -71,76 +76,161 @@ class ClipListView extends ClipField<List<XFile>> {
     // Corresponds to [ScrollView.restorationId].
     String? restorationId,
     // Corresponds to [ScrollView.clipBehavior].
-    ui.Clip clipBehavior = ui.Clip.hardEdge,
-    Key? key,
+    Clip clipBehavior = Clip.hardEdge,
+    super.key,
   })  : assert(sources.isNotEmpty),
         assert(options.isNotEmpty),
         super(
-          key: key,
           autovalidateMode: autovalidateMode,
-          initialValue: () async {
-            final items = <XFile>[];
-
-            if (initialValues is List<String>)
-              await Future.forEach<String>(initialValues, (value) async {
-                items.add(await DefaultCacheManager()
-                    .getSingleFile(value)
-                    .then((value) => XFile(value.path)));
-              });
-            else if (initialValues is List<Uint8List>)
-              items.addAll(initialValues
-                  .map((value) => XFile(File.fromRawPath(value).path))
-                  .toList());
-            else if (initialValues is List<File>)
-              items.addAll(
-                  initialValues.map((value) => XFile(value.path)).toList());
-
-            return items;
-          },
           onSaved: onSaved,
           validator: validator,
           enabled: enabled ?? decoration?.enabled ?? true,
-          builder: (ClipFieldState<List<XFile>> field) {
+          builder: (FormFieldState<List<XFile>> field) {
+            if (field.value == null) {
+              () async {
+                final items = initialValues.whereType<XFile>().toList();
+
+                await Future.forEach(initialValues, (value) async {
+                  if (value is String)
+                    items.add(
+                      await DefaultCacheManager()
+                          .getSingleFile(value)
+                          .then((file) => XFile(file.path)),
+                    );
+                  else if (value is Uint8List)
+                    items.add(XFile(File.fromRawPath(value).path));
+                  else if (value is File) items.add(XFile(value.path));
+                });
+
+                return items;
+              }.call().then(field.didChange);
+            }
+
             final InputDecoration effectiveDecoration = (decoration ??
                     const InputDecoration())
                 .applyDefaults(Theme.of(field.context).inputDecorationTheme);
 
             final value = field.value ?? <XFile>[];
 
-            return InputDecorator(
-              decoration: effectiveDecoration.copyWith(
-                errorText: field.hasError ? field.errorText : null,
-                border: InputBorder.none,
-                errorMaxLines: 2,
-              ),
-              child: ListView.separated(
-                itemBuilder: (context, index) {
-                  final bool showEmptyBuilder =
-                      (emptyBuilder != null && index >= value.length);
+            return IgnorePointer(
+              ignoring: !field.widget.enabled,
+              child: InputDecorator(
+                decoration: effectiveDecoration.copyWith(
+                  errorText: field.hasError ? field.errorText : null,
+                  border: InputBorder.none,
+                  errorMaxLines: 2,
+                ),
+                child: ReorderableListView.builder(
+                  buildDefaultDragHandles: reorderable,
+                  onReorder: (oldIndex, newIndex) {
+                    if (oldIndex == value.length) return;
 
-                  void onChangedHandler(List<XFile> value) {
-                    field.didChange(value);
-                    if (onChanged != null) {
-                      onChanged(value);
-                    }
-                  }
+                    if (newIndex > oldIndex) newIndex--;
 
-                  return GestureDetector(
-                    child: showEmptyBuilder
-                        ? emptyBuilder(context, index)
-                        : itemBuilder(context, value[index], index),
-                    onTap: () {
-                      showModalBottomSheet(
-                        clipBehavior: ui.Clip.antiAliasWithSaveLayer,
-                        context: field.context,
-                        builder: (BuildContext context) {
-                          return SafeArea(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                if (!showEmptyBuilder &&
-                                    field.value != null &&
-                                    field.value?[index] != null) ...[
+                    // log('old: $oldIndex $newIndex');
+
+                    final item = value.removeAt(oldIndex);
+
+                    field.didChange(value..insert(newIndex, item));
+
+                    onReorder?.call(oldIndex, newIndex);
+                  },
+                  footer: footer != null
+                      ? GestureDetector(
+                          child: footer(field.context),
+                          onTap: () {
+                            showModalBottomSheet(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              context: field.context,
+                              builder: (BuildContext context) {
+                                return SafeArea(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: sources
+                                        .map(
+                                          (source) => ListTile(
+                                            leading: Icon(
+                                              source == ImageSource.camera
+                                                  ? Icons.photo_camera_outlined
+                                                  : Icons
+                                                      .photo_library_outlined,
+                                            ),
+                                            title: Text(
+                                              source == ImageSource.camera
+                                                  ? ClipLocalizations.of(
+                                                          context)!
+                                                      .camera
+                                                  : ClipLocalizations.of(
+                                                          context)!
+                                                      .gallery,
+                                            ),
+                                            onTap: () async {
+                                              Navigator.of(field.context).pop();
+
+                                              // field.onPause.call();
+
+                                              (source == ImageSource.camera
+                                                      ? _imagePicker.pickImage(
+                                                          source: source,
+                                                          imageQuality: quality,
+                                                          maxHeight: maxHeight
+                                                              ?.toDouble(),
+                                                          maxWidth: maxWidth
+                                                              ?.toDouble(),
+                                                        )
+                                                      : _imagePicker
+                                                          .pickMultiImage(
+                                                          imageQuality: quality,
+                                                          maxHeight: maxHeight
+                                                              ?.toDouble(),
+                                                          maxWidth: maxWidth
+                                                              ?.toDouble(),
+                                                        ))
+                                                  .then<List<XFile>?>((value) =>
+                                                      value is List<XFile>
+                                                          ? value
+                                                          : [value as XFile])
+                                                  .then((pickedFiles) async {
+                                                field.didChange(<XFile>[
+                                                  ...value,
+                                                  ...pickedFiles!,
+                                                ]);
+
+                                                onChanged?.call(
+                                                  value.length,
+                                                  pickedFiles,
+                                                );
+
+                                                return pickedFiles;
+                                              });
+                                              //
+                                              // .whenComplete(field.onResume);
+                                            },
+                                          ),
+                                        )
+                                        .toList(),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        )
+                      : null,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      key: ValueKey('clip.item.$index'),
+                      child: itemBuilder(context, value[index], index),
+                      onTap: () {
+                        if (onTap != null) return onTap(index);
+
+                        showModalBottomSheet(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          context: field.context,
+                          builder: (BuildContext context) {
+                            return SafeArea(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
                                   if (options.contains(ClipOption.zoom))
                                     ListTile(
                                       leading:
@@ -181,92 +271,38 @@ class ClipListView extends ClipField<List<XFile>> {
                                             TextStyle(color: Colors.red[600]),
                                       ),
                                       onTap: () {
-                                        onChangedHandler(
+                                        field.didChange(
                                           value..removeAt(index),
                                         );
+
+                                        onChanged?.call(index, null);
                                         Navigator.of(context).pop();
                                       },
                                     ),
-                                ] else
-                                  ...sources
-                                      .map(
-                                        (source) => ListTile(
-                                          leading: Icon(
-                                            source == ImageSource.camera
-                                                ? Icons.photo_camera_outlined
-                                                : Icons.photo_library_outlined,
-                                          ),
-                                          title: Text(
-                                            source == ImageSource.camera
-                                                ? ClipLocalizations.of(context)!
-                                                    .camera
-                                                : ClipLocalizations.of(context)!
-                                                    .gallery,
-                                          ),
-                                          onTap: () async {
-                                            Navigator.of(field.context).pop();
-
-                                            field.onPause.call();
-
-                                            (source == ImageSource.camera
-                                                    ? _imagePicker.pickImage(
-                                                        source: source,
-                                                        imageQuality: quality,
-                                                        maxHeight: maxHeight
-                                                            ?.toDouble(),
-                                                        maxWidth: maxWidth
-                                                            ?.toDouble(),
-                                                      )
-                                                    : _imagePicker
-                                                        .pickMultiImage(
-                                                        imageQuality: quality,
-                                                        maxHeight: maxHeight
-                                                            ?.toDouble(),
-                                                        maxWidth: maxWidth
-                                                            ?.toDouble(),
-                                                      ))
-                                                .then<List<XFile>?>((value) =>
-                                                    value is List<XFile>
-                                                        ? value
-                                                        : [value as XFile])
-                                                .then((pickedFiles) async {
-                                                  final items = pickedFiles;
-
-                                                  return <XFile>[
-                                                    if (field.value != null)
-                                                      ...value,
-                                                    ...items!,
-                                                  ];
-                                                })
-                                                .then(onChangedHandler)
-                                                .whenComplete(field.onResume);
-                                          },
-                                        ),
-                                      )
-                                      .toList(),
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
-                itemCount: value.length + (emptyBuilder != null ? 1 : 0),
-                scrollDirection: scrollDirection,
-                reverse: reverse,
-                controller: scrollController,
-                primary: primary,
-                physics: physics,
-                shrinkWrap: shrinkWrap,
-                padding: padding,
-                cacheExtent: cacheExtent,
-                dragStartBehavior: dragStartBehavior,
-                keyboardDismissBehavior: keyboardDismissBehavior,
-                restorationId: restorationId,
-                clipBehavior: clipBehavior,
-                separatorBuilder: separatorBuilder ??
-                    (context, index) => const SizedBox(width: 8.0),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    );
+                  },
+                  itemCount: value.length,
+                  scrollDirection: scrollDirection,
+                  reverse: reverse,
+                  scrollController: scrollController,
+                  primary: primary,
+                  physics: physics,
+                  shrinkWrap: shrinkWrap,
+                  padding: padding,
+                  cacheExtent: cacheExtent,
+                  dragStartBehavior: dragStartBehavior,
+                  keyboardDismissBehavior: keyboardDismissBehavior,
+                  restorationId: restorationId,
+                  clipBehavior: clipBehavior,
+                  // separatorBuilder: separatorBuilder ??
+                  //     (context, index) => const SizedBox(width: 8.0),
+                ),
               ),
             );
           },

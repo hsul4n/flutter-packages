@@ -9,6 +9,8 @@ import 'clip_localizations_ar.dart';
 import 'clip_localizations_en.dart';
 import 'clip_localizations_fr.dart';
 
+// ignore_for_file: type=lint
+
 /// Callers can lookup localized strings with an instance of ClipLocalizations
 /// returned by `ClipLocalizations.of(context)`.
 ///

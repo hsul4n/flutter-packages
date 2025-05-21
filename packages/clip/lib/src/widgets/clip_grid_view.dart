@@ -1,15 +1,12 @@
 import 'dart:io';
 import 'dart:ui' as ui;
-import 'dart:typed_data';
 
 import 'package:clip/l10n/clip_localizations.dart';
-import 'package:clip/src/widgets/gallery_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:clip/clip.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 typedef ItemWidgetBuilder<ItemType> = Widget Function(
@@ -18,7 +15,7 @@ typedef ItemWidgetBuilder<ItemType> = Widget Function(
   int index,
 );
 
-class ClipGridView extends ClipField<List<XFile>> {
+class ClipGridView extends FormField<List<XFile>> {
   static final _imagePicker = ImagePicker();
 
   final Widget Function(BuildContext, int index)? emptyBuilder;
@@ -40,11 +37,11 @@ class ClipGridView extends ClipField<List<XFile>> {
   ClipGridView({
     List<dynamic> initialValues = const [],
     ValueChanged<List<XFile>?>? onChanged,
-    ClipFieldSetter<List<XFile>>? onSaved,
+    FormFieldSetter<List<XFile>>? onSaved,
     int quality = 100,
     int? maxHeight,
     int? maxWidth,
-    ClipFieldValidator<List<XFile>>? validator,
+    FormFieldValidator<List<XFile>>? validator,
     List<ImageSource> sources = const [ImageSource.camera, ImageSource.gallery],
     List<ClipOption> options = const [ClipOption.zoom, ClipOption.delete],
     bool? enabled,
@@ -81,35 +78,37 @@ class ClipGridView extends ClipField<List<XFile>> {
     String? restorationId,
     // Corresponds to [ScrollView.clipBehavior].
     ui.Clip clipBehavior = ui.Clip.hardEdge,
-    Key? key,
+    super.key,
   })  : assert(sources.isNotEmpty),
         assert(options.isNotEmpty),
         super(
-          key: key,
           autovalidateMode: autovalidateMode,
-          initialValue: () async {
-            final items = <XFile>[];
-
-            if (initialValues is List<String>)
-              await Future.forEach<String>(initialValues, (value) async {
-                items.add(await DefaultCacheManager()
-                    .getSingleFile(value)
-                    .then((value) => XFile(value.path)));
-              });
-            else if (initialValues is List<Uint8List>)
-              items.addAll(initialValues
-                  .map((value) => XFile(File.fromRawPath(value).path))
-                  .toList());
-            else if (initialValues is List<File>)
-              items.addAll(
-                  initialValues.map((value) => XFile(value.path)).toList());
-
-            return items;
-          },
           onSaved: onSaved,
           validator: validator,
           enabled: enabled ?? decoration?.enabled ?? true,
-          builder: (ClipFieldState<List<XFile>> field) {
+          builder: (FormFieldState<List<XFile>> field) {
+            if (field.value == null) {
+              () async {
+                final items = <XFile>[];
+
+                if (initialValues is List<String>)
+                  await Future.forEach<String>(initialValues, (value) async {
+                    items.add(await DefaultCacheManager()
+                        .getSingleFile(value)
+                        .then((value) => XFile(value.path)));
+                  });
+                else if (initialValues is List<Uint8List>)
+                  items.addAll(initialValues
+                      .map((value) => XFile(File.fromRawPath(value).path))
+                      .toList());
+                else if (initialValues is List<File>)
+                  items.addAll(
+                      initialValues.map((value) => XFile(value.path)).toList());
+
+                return items;
+              }.call().then(field.didChange);
+            }
+
             final InputDecoration effectiveDecoration = (decoration ??
                     const InputDecoration())
                 .applyDefaults(Theme.of(field.context).inputDecorationTheme);
@@ -216,7 +215,7 @@ class ClipGridView extends ClipField<List<XFile>> {
                                           onTap: () async {
                                             Navigator.of(field.context).pop();
 
-                                            field.onPause.call();
+                                            // field.onPause.call();
 
                                             (source == ImageSource.camera
                                                     ? _imagePicker.pickImage(
@@ -240,16 +239,15 @@ class ClipGridView extends ClipField<List<XFile>> {
                                                         ? value
                                                         : [value as XFile])
                                                 .then((pickedFiles) async {
-                                                  final items = pickedFiles;
+                                              final items = pickedFiles;
 
-                                                  return <XFile>[
-                                                    if (field.value != null)
-                                                      ...value,
-                                                    ...items!,
-                                                  ];
-                                                })
-                                                .then(onChangedHandler)
-                                                .whenComplete(field.onResume);
+                                              return <XFile>[
+                                                if (field.value != null)
+                                                  ...value,
+                                                ...items!,
+                                              ];
+                                            }).then(onChangedHandler);
+                                            // .whenComplete(field.onResume);
                                           },
                                         ),
                                       )

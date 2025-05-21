@@ -41,11 +41,11 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _clipKey = GlobalKey<ClipState>();
+  final _clipKey = GlobalKey<FormState>();
 
   final _user = User(
     id: 1,
@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('Flutter Clipy Demo Home Page'),
       ),
-      body: Clip(
+      body: Form(
         key: _clipKey,
         child: SingleChildScrollView(
           child: Column(
@@ -143,18 +143,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   initialValues: <String>[
                     _user.avatar!,
                     _user.avatar!,
-                    _user.avatar!,
-                    _user.avatar!,
-                    _user.avatar!,
-                    _user.avatar!,
-                    _user.avatar!,
-                    _user.avatar!,
+                    //   _user.avatar!,
+                    //   _user.avatar!,
+                    //   _user.avatar!,
+                    //   _user.avatar!,
+                    //   _user.avatar!,
+                    //   _user.avatar!,
                   ],
                   quality: 20,
                   maxHeight: 1024,
                   validator: (a) => 'aa',
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  emptyBuilder: (context, index) {
+                  footer: (context) {
                     return AspectRatio(
                       aspectRatio: 1,
                       child: CircleAvatar(
@@ -169,13 +169,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     );
                   },
-                  itemBuilder: (context, xFile, index) {
+                  itemBuilder: (context, file, index) {
                     return AspectRatio(
                       aspectRatio: 1,
                       child: Card(
+                        margin: EdgeInsets.all(8.0),
                         child: CircleAvatar(
                           radius: 56,
-                          backgroundImage: FileImage(File(xFile.path)),
+                          backgroundImage: FileImage(File(file.path)),
                         ),
                       ),
                     );
