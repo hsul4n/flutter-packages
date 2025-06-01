@@ -154,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   maxHeight: 1024,
                   validator: (a) => 'aa',
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  footer: (context) {
+                  header: (context) {
                     return AspectRatio(
                       aspectRatio: 1,
                       child: CircleAvatar(

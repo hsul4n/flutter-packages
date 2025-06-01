@@ -11,7 +11,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 class ClipListView extends FormField<List<XFile>> {
   static final _imagePicker = ImagePicker();
 
-  final Widget Function(BuildContext)? footer;
+  final Widget Function(BuildContext)? header;
 
   final ItemWidgetBuilder<XFile> itemBuilder;
 
@@ -34,7 +34,7 @@ class ClipListView extends FormField<List<XFile>> {
     void Function(int index)? onTap,
     FormFieldSetter<List<XFile>>? onSaved,
     BoxConstraints constraints = const BoxConstraints(),
-    int quality = 100,
+    int quality = 50,
     int? maxHeight,
     int? maxWidth,
     FormFieldValidator<List<XFile>>? validator,
@@ -45,7 +45,7 @@ class ClipListView extends FormField<List<XFile>> {
     AutovalidateMode? autovalidateMode,
     required this.itemBuilder,
     this.separatorBuilder,
-    this.footer,
+    this.header,
     this.onReorder,
     // Corresponds to [ScrollView.controller].
     ScrollController? scrollController,
@@ -127,17 +127,15 @@ class ClipListView extends FormField<List<XFile>> {
 
                     if (newIndex > oldIndex) newIndex--;
 
-                    // log('old: $oldIndex $newIndex');
-
                     final item = value.removeAt(oldIndex);
 
                     field.didChange(value..insert(newIndex, item));
 
                     onReorder?.call(oldIndex, newIndex);
                   },
-                  footer: footer != null
+                  header: header != null
                       ? GestureDetector(
-                          child: footer(field.context),
+                          child: header(field.context),
                           onTap: () {
                             showModalBottomSheet(
                               clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -192,8 +190,8 @@ class ClipListView extends FormField<List<XFile>> {
                                                           : [value as XFile])
                                                   .then((pickedFiles) async {
                                                 field.didChange(<XFile>[
-                                                  ...value,
                                                   ...pickedFiles!,
+                                                  ...value,
                                                 ]);
 
                                                 onChanged?.call(
